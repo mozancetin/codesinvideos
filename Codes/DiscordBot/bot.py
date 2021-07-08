@@ -13,15 +13,21 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)} ms")
 
+def is_it_me(ctx):
+    return ctx.author.id == 217741989385469952 # eşitse True değilse False
+
 @bot.command()
+@commands.check(is_it_me)
 async def load(ctx, extension):
     bot.load_extension(f"cogs.{extension}") # extension = economy --> cogs.economy
 
 @bot.command()
+@commands.check(is_it_me)
 async def unload(ctx, extension):
     bot.unload_extension(f"cogs.{extension}")
 
 @bot.command()
+@commands.check(is_it_me)
 async def reload(ctx, extension): # Sil, tekrar yükle
     if extension == "all":
         for filename in os.listdir('./cogs'):
