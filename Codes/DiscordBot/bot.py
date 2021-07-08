@@ -14,7 +14,7 @@ async def ping(ctx):
     await ctx.send(f"Pong! {round(bot.latency * 1000)} ms")
 
 def is_it_me(ctx):
-    return ctx.author.id == 217741989385469952 # eşitse True değilse False
+    return ctx.author.id == YOUR_DISCORD_ID # eşitse True değilse False
 
 @bot.command()
 @commands.check(is_it_me)
