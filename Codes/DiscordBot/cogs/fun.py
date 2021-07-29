@@ -16,7 +16,7 @@ class Fun(commands.Cog):
 
     @tasks.loop(minutes=1)
     async def kurallar(self):
-        channel = await self.bot.fetch_channel(749980290868314233)
+        channel = await self.bot.fetch_channel(CHANNEL_ID)
 
         kurallarListesi = [
             "Taşkınlık çıkartmayın",
