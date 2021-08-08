@@ -1,4 +1,5 @@
 import discord
+from discord.colour import Color
 from discord.ext import commands
 
 class Moderasyon(commands.Cog):
@@ -6,6 +7,24 @@ class Moderasyon(commands.Cog):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
+
+    @commands.Cog.listener()
+    async def on_message_delete(self, message):
+        embed = discord.Embed(title=f"{message.author.name} adlı kullanıcı bir mesaj sildi.", color=discord.Colour.dark_red())
+        embed.add_field(name=message.content, value="Bu mesajı sildi!")
+
+        channel = await self.bot.fetch_channel(749980290868314233)
+        await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message_edit(self, message_before, message_after):
+        embed = discord.Embed(title=f"{message_before.author.name} adlı kullanıcı bir mesajı düzeltti.", color = discord.Colour.dark_red())
+        embed.add_field(name="Önceki Mesaj:", value=message_before.content, inline=False)
+        embed.add_field(name="Düzenlenen Mesaj:", value=message_after.content, inline=False)
+
+        channel = await self.bot.fetch_channel(749980290868314233)
+        await channel.send(embed=embed)
+
 
     @commands.command()
     @commands.has_permissions(administrator = True)
